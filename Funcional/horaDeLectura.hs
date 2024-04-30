@@ -109,12 +109,15 @@ nombresTitulos miBiblioteca = map titulo miBiblioteca
 titulo :: Libro -> String
 titulo (_, tituloLibro, _) = tituloLibro
 
--------bibliotecaLigera----------
+-------bibliotecaLigera--------------
 esBibliotecaLigera :: Biblioteca -> Bool
 esBibliotecaLigera unaBiblioteca = all esLecturaLigera unaBiblioteca
 
 esLecturaLigera :: Libro -> Bool
 esLecturaLigera unLibro = ((<= 40) . cantidadPaginas) unLibro
+
+
+
 
 
 
