@@ -1,6 +1,6 @@
 
 import Text.Show.Functions
-import Foreign (toBool)
+
 
 data Personaje = UnPersonaje {
     nombre :: Nombre,
@@ -12,9 +12,10 @@ data Personaje = UnPersonaje {
 
 type Nombre = String
 type PoderBasico = Personaje -> Personaje
-type SuperPoder = String
+type SuperPoder = Personaje -> Personaje
 type SuperPoderActivo = Bool
 type CantidadVidas = Int
+type Radio = Int
 
 type TipoTuerca = String
 
@@ -28,20 +29,37 @@ lluviaDeTuercas _ personaje = personaje
 
 
 modificarVida :: (Int->Int) -> Personaje -> Personaje ---recibe una funcion y un personaje y devuelve personaje. modifica la vida de un personaje ayuda a no repetir logica
-modificarVida unaFuncion personaje = UnPersonaje { cantidadVidas = unaFuncion . cantidadVidas $ personaje}
+modificarVida unaFuncion personaje = personaje { cantidadVidas = unaFuncion . cantidadVidas $ personaje}
 
 
+granadaDeEspinas :: Radio -> PoderBasico
+granadaDeEspinas radio personaje| radio > 3 = personaje { nombre = nombre personaje ++ "“Espina estuvo aquí”"}
+                                | radio > 3 && cantidadVidas personaje < 800 = personaje { nombre = nombre personaje ++ " Espina estuvo aquí", cantidadVidas = 0, superPoderActivo = False}
+                                | otherwise = bolaEspinosa personaje
+
+
+torretaCurativa :: PoderBasico
+torretaCurativa personaje = (modificarVida (*2) . modificarSuperPoderActivo) personaje
+
+modificarSuperPoderActivo :: Personaje -> Personaje
+modificarSuperPoderActivo personaje = personaje { superPoderActivo = True}
 
 
 
 espina :: Personaje
-espina = UnPersonaje "Espina" bolaEspinosa "Granada de Espinas" False 4800
+espina = UnPersonaje {
+    nombre = "Espina",
+    poderBasico = bolaEspinosa,
+    superPoder = granadaDeEspinas 5,
+    superPoderActivo = True,
+    cantidadVidas = 4800
+}
 
 pamela :: Personaje
 pamela = UnPersonaje { 
     nombre = "Pamela", 
     poderBasico = lluviaDeTuercas "sanadora",       --aplicacion parcial 
-    superPoder = "Torreta Curativa", 
+    superPoder = torretaCurativa, 
     superPoderActivo = False, 
     cantidadVidas = 9600 
     }
