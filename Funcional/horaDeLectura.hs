@@ -58,7 +58,7 @@ cantidadPaginasPorLibro :: Biblioteca -> [Int]
 cantidadPaginasPorLibro miBiblioteca = map cantidadPaginas miBiblioteca
 
 cantidadPaginas :: Libro -> Int
-cantidadPaginas (_, _, paginas) = paginas
+cantidadPaginas (_, _, paginas) = paginas    
 
 cantidadLibros :: Biblioteca -> Int
 cantidadLibros miBiblioteca = length miBiblioteca
@@ -116,8 +116,9 @@ esBibliotecaLigera unaBiblioteca = all esLecturaLigera unaBiblioteca
 esLecturaLigera :: Libro -> Bool
 esLecturaLigera unLibro = ((<= 40) . cantidadPaginas) unLibro
 
-
-
+type Genero = String
+genero :: Libro -> Genero
+genero unLibro | esComic unLibro then "Comic" | 
 
 
 
