@@ -125,7 +125,7 @@ poderGritoGuerra :: Barbaro->Int
 poderGritoGuerra = (4*).length.objetos
 
 cantidadLetrasHabilidades :: Barbaro->Int
-cantidadLetrasHabilidades = sum.map length.habilidades ---point free
+cantidadLetrasHabilidades = sum.map length.habilidades 
 
 caligrafia :: Evento
 caligrafia barbaro = habilidadesTieneMasDe3Vocales barbaro && habilidadesComienzanConMayuscula barbaro
