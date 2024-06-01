@@ -158,12 +158,12 @@ pasaUnaAventura criterio barbaro unaAventura = criterio (\evento -> evento barba
 sinRepetidos :: (Eq a)=>[a]->[a]----recursividad
 sinRepetidos [] = []
 sinRepetidos (cabeza:cola)
-    |elem cabeza cola = cola
-    |otherwise = (cabeza:cola)
+    |elem cabeza cola = sinRepetidos cola
+    |otherwise = (cabeza: sinRepetidos cola)
 
 
 descendiente :: Barbaro->Barbaro
-descendiente = utilizarObjetos . mapNombre (++ "*"). mapHabilidades sinRepetidos
+descendiente = utilizarO bjetos . mapNombre (++ "*"). mapHabilidades sinRepetidos
 
 utilizarObjetos :: Barbaro->Barbaro
 utilizarObjetos barbaro = foldr ($) barbaro (objetos barbaro)
