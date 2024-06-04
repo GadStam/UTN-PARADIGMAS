@@ -132,3 +132,5 @@ realizarLabor unasTareas unHeroe = foldl (hacerTarea) unHeroe unasTareas
 
 
 
+
+
