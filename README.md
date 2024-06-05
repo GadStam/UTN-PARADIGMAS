@@ -9,5 +9,7 @@ Heroes Leyenda: https://www.utnianos.com.ar/foro/attachment.php?aid=20203
 
 Naruto: https://drive.google.com/file/d/1s91Ta3yrfcJltTG-i_2lll8kwUSMwFeh/view
 
+Pinky Y Cerebro: https://docs.google.com/document/d/12PSO8F15XHRvOn53khcSMqku6qVuo0j2r9g77GCWZHk/edit
+
 
 
