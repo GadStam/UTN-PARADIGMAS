@@ -1,5 +1,5 @@
 
-# Consignas ejercicios
+# Parciales
 
 ## [**Tierra de Barbaros:**](Funcional/tierraDeBarbaros.hs)
 https://docs.google.com/document/d/1mBwfHLXmcZKLHSy22exTxibwny9x2a81hKW000tOFMQ/edit
