@@ -1,4 +1,4 @@
-module Parcial where
+
 import Text.Show.Functions()
 
 ---------------------DATAS---------------------
