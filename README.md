@@ -1,15 +1,15 @@
 
 # Consignas ejercicios
 
-Tierra de Barbaros: https://docs.google.com/document/d/1mBwfHLXmcZKLHSy22exTxibwny9x2a81hKW000tOFMQ/edit
+[Tierra de Barbaros:](Funcional/tierraDeBarbaros.hs) https://docs.google.com/document/d/1mBwfHLXmcZKLHSy22exTxibwny9x2a81hKW000tOFMQ/edit
 
-Haskell Cheff: https://docs.google.com/document/d/13SS-HXVR7z5SOgQCwYh2Maob7QhSh858PTSzc7MymCY/edit
+[Haskell Cheff:](Funcional/haskellCheff.hs) https://docs.google.com/document/d/13SS-HXVR7z5SOgQCwYh2Maob7QhSh858PTSzc7MymCY/edit
 
-Heroes Leyenda: https://www.utnianos.com.ar/foro/attachment.php?aid=20203
+[Heroes Leyenda:](Funcional/heroesLeyenda.hs) https://www.utnianos.com.ar/foro/attachment.php?aid=20203
 
-Naruto: https://drive.google.com/file/d/1s91Ta3yrfcJltTG-i_2lll8kwUSMwFeh/view
+[Naruto:](Funcional/parcial2023Naruto.hs) https://drive.google.com/file/d/1s91Ta3yrfcJltTG-i_2lll8kwUSMwFeh/view
 
-Pinky Y Cerebro: https://docs.google.com/document/d/12PSO8F15XHRvOn53khcSMqku6qVuo0j2r9g77GCWZHk/edit
+[Pinky Y Cerebro:](Funcional/pinkyCerebro.hs) https://docs.google.com/document/d/12PSO8F15XHRvOn53khcSMqku6qVuo0j2r9g77GCWZHk/edit
 
 
 
