@@ -19,6 +19,9 @@ https://docs.google.com/document/d/12PSO8F15XHRvOn53khcSMqku6qVuo0j2r9g77GCWZHk/
 ## [**Padrinos Magicos:**](Funcional/padrinosMagicos.hs)
 https://drive.google.com/file/d/18c1VXjtvMaJeIIHE-gMtTOWycW4r62Ig/view
 
+## [**FMI:**](Funcional/fmi.hs)
+https://docs.google.com/document/d/1l9UjDqVhLdeiON6rtXf7EwGU5JZvN2TWu5AJQzVmSwE/edit
+
 
 
 
