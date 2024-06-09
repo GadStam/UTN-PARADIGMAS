@@ -1,5 +1,5 @@
 import Text.Show.Functions
-import GHC.Generics (C)
+
 
 
 data Participante = UnParticipante{

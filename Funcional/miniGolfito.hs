@@ -1,5 +1,3 @@
-
--- Modelo inicial
 data Jugador = UnJugador {
   nombre :: String,
   padre :: String,
@@ -10,6 +8,8 @@ data Habilidad = Habilidad {
   fuerzaJugador :: Int,
   precisionJugador :: Int
 } deriving (Eq, Show)
+
+-- Model
 
 -- Jugadores de ejemplo
 bart = UnJugador "Bart" "Homero" (Habilidad 25 60)
@@ -32,52 +32,95 @@ mayorSegun f a b
   | f a > f b = a
   | otherwise = b
 
+------Accesors---------
+mapHabilidad :: (Habilidad -> Habilidad) -> Jugador -> Jugador
+mapHabilidad f unJugador = unJugador {habilidad = f.habilidad $ unJugador}
+
+-----------------Accesors Habilidad--------------
+mapFuerza :: (Int -> Int) -> Habilidad -> Habilidad
+mapFuerza f unaHabilidad = unaHabilidad {fuerzaJugador = f.fuerzaJugador $ unaHabilidad}
+
+mapPrecision :: (Int -> Int) -> Habilidad -> Habilidad
+mapPrecision f unaHabilidad = unaHabilidad {precisionJugador = f.precisionJugador $ unaHabilidad}
+-----------------Accesors Tiro--------------
+mapVelocidad :: (Int -> Int) -> Tiro -> Tiro
+mapVelocidad f unTiro = unTiro {velocidad = f.velocidad $ unTiro}
+
+mapPrecisionTiro :: (Int -> Int) -> Tiro -> Tiro
+mapPrecisionTiro f unTiro = unTiro {precision = f.precision $ unTiro}
+
+mapAltura :: (Int -> Int) -> Tiro -> Tiro
+mapAltura f unTiro = unTiro {altura = f.altura $ unTiro}
+
+----------------------------------
+-- Punto 1
 type Palo = Habilidad -> Tiro
 
 putter :: Palo
-putter habilidad = UnTiro {
+putter habilidad = UnTiro{
   velocidad = 10,
-  precision = 2* precisionJugador habilidad,
+  precision = precisionJugador habilidad * 2,
   altura = 0
 }
 
 madera :: Palo
-madera habilidad = UnTiro {
+madera habilidad = UnTiro{
   velocidad = 100,
   precision = div (precisionJugador habilidad) 2,
   altura = 5
 }
-type N = Int
-hierro :: N -> Palo
-hierro n habilidad = UnTiro {
-  velocidad = fuerzaJugador habilidad *n,
+
+hierro :: Int -> Palo
+hierro n habilidad = UnTiro{
+  velocidad = (n*). fuerzaJugador $ habilidad,
   precision = div (precisionJugador habilidad) n,
-  altura = max 0 (n-3)
+  altura = max 0 (n - 3)
 }
 
-palos :: [Palo]
-palos = [putter, madera] ++ map hierro [1..10]
-
 golpe :: Jugador -> Palo -> Tiro
-golpe jugador palo = palo (habilidad jugador)
-
-type Obstaculo = Tiro -> Bool
-type EfectoObstaculo = Int->Tiro -> Tiro
+golpe jugador palo = palo.habilidad $ jugador
+---------------------------------
+-- Punto 2
+type Obstaculo = Tiro -> Tiro
 
 tunelConRampita :: Obstaculo
-tunelConRampita tiro = precision tiro > 90 && altura tiro == 0
+tunelConRampita tiro | (precision tiro > 90) && (altura tiro == 0) = mapAltura(const 0). mapPrecisionTiro(const 100) . mapVelocidad (*2) $ tiro
+                     | otherwise = detenerse tiro
 
-laguna :: Obstaculo
-laguna tiro = velocidad tiro > 80 && between 1 5 (altura tiro)
+laguna :: Int -> Obstaculo
+laguna largo tiro | (velocidad tiro > 80) && estaEntre 1 5 (altura tiro) = mapAltura (`div` largo) tiro
+                  | otherwise = detenerse tiro
 
-efectos :: EfectoObstaculo
-efectos largoLaguna tiro | tunelConRampita tiro = tiro {precision = 100, velocidad = 2*velocidad tiro, altura = 0}
-             | laguna tiro = modificarLaguna tiro largoLaguna
-             | otherwise = tiro
+estaEntre :: Int->Int->Int -> Bool
+estaEntre num1 num2 tiro = between num1 num2 tiro
 
-        
-modificarLaguna :: Tiro -> Int -> Tiro
-modificarLaguna tiro largoLaguna = tiro {altura = div (altura tiro) largoLaguna, velocidad = div (velocidad tiro) largoLaguna}
+hoyo :: Obstaculo
+hoyo tiro | estaEntre 5 20 (velocidad tiro) && (precision tiro > 95) && (altura tiro == 0) = detenerse tiro
+          | otherwise = tiro
+
+detenerse :: Tiro -> Tiro
+detenerse tiro = UnTiro{
+  velocidad = 0,
+  precision = 0,
+  altura = 0
+}
+
+---------------------------------
+-- Punto 3
+palosUtiles :: Jugador -> Obstaculo -> [Palo]
+palosUtiles jugador obstaculo = filter(esUtil jugador obstaculo) [putter, madera] ++ map hierro [1..10]
+
+esUtil :: Jugador -> Obstaculo -> Palo -> Bool
+esUtil jugador obstaculo palo = aplicarObstaculo jugador obstaculo palo /= detenerse (golpe jugador palo)
+
+
+aplicarObstaculo :: Jugador -> Obstaculo -> Palo->Tiro
+aplicarObstaculo  jugador obstaculo palo = obstaculo . golpe jugador $ palo
+
+
+
+
+
 
 
 
