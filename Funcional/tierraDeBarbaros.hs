@@ -163,7 +163,7 @@ sinRepetidos (cabeza:cola)
 
 
 descendiente :: Barbaro->Barbaro
-descendiente = utilizarO bjetos . mapNombre (++ "*"). mapHabilidades sinRepetidos
+descendiente = utilizarObjetos . mapNombre (++ "*"). mapHabilidades sinRepetidos
 
 utilizarObjetos :: Barbaro->Barbaro
 utilizarObjetos barbaro = foldr ($) barbaro (objetos barbaro)
