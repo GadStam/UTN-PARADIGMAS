@@ -72,25 +72,32 @@ cumpleRequisitos(Cantante, pequenio(DuracionEspecifica)):-
 
 % ----------------- Punto 5 -----------------
 masFamoso(Cantante) :-
-	nivelFamoso(Cantante, NivelMasFamoso),
-	forall(nivelFamoso(_, Nivel), NivelMasFamoso >= Nivel).
+    esVocaloid(Cantante),
+    forall(vocaloid(OtroCantante, _), tieneMasFama(Cantante, OtroCantante)).
 
-nivelFamoso(Cantante, Nivel):- 
-famaTotal(Cantante, FamaTotal), 
-cantidadCanciones(Cantante, Cantidad), 
-Nivel is FamaTotal * Cantidad.
+esVocaloid(Cantante) :-
+    vocaloid(Cantante, _).
 
-famaTotal(Cantante, FamaTotal):- 
-vocaloid(Cantante,_),
-findall(Fama, famaConcierto(Cantante, Fama),  CantidadesFama), 
-sumlist(CantidadesFama, FamaTotal).
+nivelFamoso(Cantante, Nivel) :-
+    famaTotal(Cantante, FamaTotal),
+    cantidadCanciones(Cantante, Cantidad),
+    Nivel is FamaTotal * Cantidad.
 
-famaConcierto(Cantante, Fama):-
-puedeParticiparEn(Cantante,Concierto),
-fama(Concierto, Fama).
+famaTotal(Cantante, FamaTotal) :-
+    findall(Fama, famaConcierto(Cantante, Fama), CantidadesFama),
+    sumlist(CantidadesFama, FamaTotal).
 
-fama(Concierto,Fama):- 
-concierto(Concierto,_,Fama,_).
+famaConcierto(Cantante, Fama) :-
+    puedeParticiparEn(Cantante, Concierto),
+    fama(Concierto, Fama).
+
+fama(Concierto, Fama) :-
+    concierto(Concierto, _, Fama, _).
+
+tieneMasFama(Cantante, OtroCantante) :-
+    nivelFamoso(Cantante, Nivel),
+    nivelFamoso(OtroCantante, OtroNivel),
+    Nivel >= OtroNivel.
 
 % ----------------- Punto 6 -----------------
 conoceA(megurineLuka, hatsuneMiku).
