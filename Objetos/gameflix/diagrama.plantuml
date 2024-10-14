@@ -1,0 +1,86 @@
+@startuml
+
+
+abstract class Juego{
+   nombre
+   precio
+   categoria
+   --
+   perteneceACategoria(unaCategoria)
+   seLlama(unNombre)
+   (abstract) afectarA(unCliente, unasHoras)
+}
+
+class Moba extends Juego{
+}
+
+class JuegoDeTerror extends Juego{
+}
+
+class JuegoEstrategico extends Juego{
+}
+
+class JuegoViolento extends Juego{
+}
+
+
+class Suscripcion{
+
+}
+
+object gameflix{
+    juegos
+    --
+    juegosPorCategoria(unaCategoria)
+    juegoQueSeLlama(unNombre)
+    juegoRecomendado()
+    cobrarSuscripciones()
+}
+
+class Cliente{
+    suscripcion
+    --
+    pagarSuscripcion()
+    bajarHumor(unValor)
+    aumentarHumor(unValor)
+    pagar(unMonto)
+}
+
+object premium{
+    precio
+    --
+    precio()
+    puedeJugar(unJuego)
+}
+
+object base{
+    precio
+    --
+    precio()
+    puedeJugar(unJuego)
+}
+
+class SuscripcionPorCategoria implements Suscripcion{
+    categoria
+    precio
+    --
+    puedeJugar(unJuego)
+    precio()
+}
+
+interface Suscripcion{
+    precio()
+    puedeJugar(unJuego)
+}
+
+
+
+gameflix --> "*" Juego: juegos
+gameflix --> "*" Cliente: clientes
+Cliente --> Suscripcion
+premium .u.|> Suscripcion
+base .u.|> Suscripcion
+@enduml
+
+
+
