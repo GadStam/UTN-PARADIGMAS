@@ -1,0 +1,24 @@
+@startuml
+
+class TrajeTierno{
+    capacidadSusto = 2
+}
+
+class TrajeTerrorificos{
+    capacidadSusto = 5
+}
+
+class Maquillaje{
+    capacidadSusto = 3
+}
+
+class Ninio{
+    elementos = []
+    actitud
+    caramelos
+
+    
+
+    
+}
+@enduml

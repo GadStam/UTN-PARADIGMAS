@@ -28,6 +28,10 @@ class Ninio{
     caramelos += unosCaramelos
   }
 
+  method elementos(){
+    return elementos
+  }
+
   method caramelos(){
     return caramelos
   }
@@ -98,9 +102,6 @@ class Adulto{
   class Legion{
     var miembros = #{}
 
-
-  
-
     method capacidadAsustar(){
       return miembros.sum({unMiembro => unMiembro.capacidadSusto()})
     }
@@ -117,12 +118,24 @@ class Adulto{
       miembros.forEach({unMiembro => unMiembro.asustarA(unaPersona)})
   
     }
+  }
 
-     
+  class Barriales{
+    const niniosQueHabitan = #{}
+//los tres ninios con mas caramelos
+    method niniosConMasCaramelos(){
+      return niniosQueHabitan.sortBy({unNinio => unNinio.caramelos()}).take(3)
+    }
 
-    
+    //Los elementos, sin repetidos, usados por los niños con más de 10 caramelos.
+    method elementosUsadosPorNiniosConMasDe10Caramelos(){
+      return self.niniosCopnMasDeCaramelos(10).flatMap({unNinio => unNinio.elementos()}).distinct()
+    }
 
-  
+    method niniosCopnMasDeCaramelos(cantidadCaramelos){
+      return niniosQueHabitan.filter({unNinio => unNinio.tieneMasDecaramelos(cantidadCaramelos)})
+    }
+
   }
 
 
