@@ -1,0 +1,84 @@
+@startuml
+abstract class Pelicula{
+    nombre
+    elenco
+
+    elenco()
+    nombre()
+    presupuesto()
+    sumaSueldos()
+    recaudado()
+    {abstract}adicional()
+    dineroRecaudado()
+    rodarPelicula()
+    esEconomica()
+}
+
+class PeliculaDrama extends Pelicula{
+    adicional()
+}
+
+class PeliculaAccion extends Pelicula{
+    vidriosRotos
+    presupuesto()
+    adicional()
+}
+
+class PeliculaTerror extends Pelicula{
+    cantidadCuchillos
+    adicional()
+}
+
+class PeliculaComedia extends Pelicula{
+    adicional()
+}
+
+class Artista{
+    experiencia
+    cantidadPeliculasActuadas
+    ahorros
+
+    nivelFama()
+    cantidadPeliculasActuadasMasDe(unaCantidad)
+    sueldo()
+    recategorizar()
+    actuar()
+}
+
+interface Experiencia{
+    sueldoXExperiencia(cantidadPeliculasActuadas)
+    recategorizar(unArtista)
+}
+
+object amateur{
+    sueldoXExperiencia(cantidadPeliculasActuadas)
+    recategorizar(unArtista)
+}
+
+object establecida{
+    sueldoXExperiencia(cantidadPeliculasActuadas)
+    recategorizar(unArtista)
+}
+
+object estrella{
+    sueldoXExperiencia(cantidadPeliculasActuadas)
+    recategorizar(unArtista)
+}
+
+object imPdep{
+    peliculas
+    artistas()
+    artistaConMejorSueldo()
+    nombresPeliculasEconomicas()
+    peliculasEconomias()
+    gananciasPelisEconomias()
+    recategorizarArtistas()
+}
+
+amateur .u.|> Experiencia
+establecida .u.|> Experiencia
+estrella .u.|> Experiencia
+Artista --> Experiencia
+imPdep --> "*" Pelicula: peliculas
+Pelicula --> "*" Artista: artistas
+@enduml

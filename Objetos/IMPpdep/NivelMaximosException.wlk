@@ -1,0 +1,1 @@
+class NivelMaximosException inherits Exception(message = "Alcanzaste el nivel maximos"){}
