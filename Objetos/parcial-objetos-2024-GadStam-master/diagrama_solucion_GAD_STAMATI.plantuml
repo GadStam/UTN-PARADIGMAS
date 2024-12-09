@@ -1,0 +1,94 @@
+@startuml
+class Entrada{
+    banda
+    fecha
+    precioAlPublico()
+    esDelAnoAnterior()
+    nombreBanda()
+}
+
+class Asistente{
+    abono
+    historialEntradas
+    dinero
+    comprarEntrada(entrada)
+    tieneSaldoPositivo()
+    pagarEntrada(entrada)
+    entradasAnoAnterior()
+    nomberBandasQueCompro()
+    cantidadEntradasCompradas()
+    montoGastadoEnEntradas()
+    esVip()
+    aumentarDescuento()
+}
+
+object fan{
+    tieneDescuento()
+    esVip()
+}
+
+class Vip{
+    descuento
+    aumentoDescuento()
+    aplicarDescuento(precio)
+    tieneDescuento()
+    esVip()
+}
+
+Interface Abono{
+    tieneDescuento()
+    esVip()
+}
+
+abstract class Banda{
+    nombre
+    nombre()
+    canon()
+    presupuesto()
+    {abstract}gastoPorTipoDeBanda()
+    popularidad()
+}
+
+class BandaDeRock extends Banda{
+    solosDeGuitarra
+    gastoPorTipoDeBanda()
+    popularidad()
+}
+
+class BandaDeTrap extends Banda{
+    tieneHielo
+    gastoPorTipoDeBanda()
+    popularidad()
+    canon()
+}
+
+class BandaIndie extends Banda{
+    instrumentos
+    gastoPorTipoDeBanda()
+    popularidad()
+}
+
+object pdepEntetainment{
+    impuestoPorProductora
+    asistentes
+    bandas
+    gananciaTotal()
+    entradasVendidas()
+    bandaMasPopular()
+    bonificicarAsitentesVip()
+    presupuestoTotalDeBandas()
+    montoTotalGastadoEnEntradas()
+}
+
+Vip .u.|> Abono
+fan .u.|> Abono
+Asistente --> "*" Entrada: historialEntradas
+pdepEntetainment --> "*" Asistente: asistentes
+pdepEntetainment --> "*" Banda: bandas
+Entrada --> Banda: banda
+Asistente --> Abono: abono
+
+
+
+
+@enduml
